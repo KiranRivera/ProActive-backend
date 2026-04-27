@@ -5,16 +5,31 @@ const admin = require('firebase-admin');
 
 const app = express();
 
-// 1. CONFIGURACIÓN DE CORS (Única y centralizada)
-app.use(cors({
-  origin: true, // Esto refleja el origen de la petición, sea cual sea
-  credentials: true,
-  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+// SOLUCIÓN DEFINITIVA: Middleware Manual de Headers
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "https://pro-active-beta.vercel.app"
+  ];
+  const origin = req.headers.origin;
 
-// Responder 200 OK a todas las peticiones OPTIONS (Preflight)
-app.options(/^(.*)$/, cors());
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  // Si es una petición OPTIONS (Preflight), respondemos 200 inmediatamente
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
+
+// IMPORTANTE: Elimina cualquier otra línea de app.use(cors(...)) y app.options(...)
 
 app.use(express.json()); // Middleware para parsear JSON
 
