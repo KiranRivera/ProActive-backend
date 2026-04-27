@@ -7,7 +7,7 @@ const app = express();
 // Configuración de CORS
 app.use(cors({
   origin: [
-    "http://localhost:3000", // Para seguir probando en local
+    "http://localhost:5173", // Para seguir probando en local
     "https://pro-active-beta.vercel.app" // TU DOMINIO REAL DE VERCEL
   ],
   methods: ["GET", "POST", "PATCH", "DELETE"],
