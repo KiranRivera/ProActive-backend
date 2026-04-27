@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+
+# Configuración de Firebase y Variables de Entorno
+# Bloquea el archivo donde guardarás tus credenciales como strings
+.env
+.env.local
+
+# Bloquea TODOS los archivos JSON de credenciales
+*.json
+
+# EXCEPCIÓN: Permitir package.json y package-lock.json (Son obligatorios)
+!package.json
+!package-lock.json
+
+# Logs de errores y sistema
+npm-debug.log*
+logs/
+
+# Archivo específico de llaves de Firebase (Doble protección)
+serviceAccountKey.json
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
