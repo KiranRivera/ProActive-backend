@@ -9,4 +9,6 @@ router.post('/register', authController.registerUser);
 
 router.post('/login', authController.loginUser);
 
+router.patch('/update-plan', authController.updatePlan);
+
 module.exports = router;
