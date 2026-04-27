@@ -4,6 +4,15 @@ const cors = require('cors');
 const admin = require('firebase-admin');
 
 const app = express();
+// Configuración de CORS
+app.use(cors({
+  origin: [
+    "http://localhost:3000", // Para seguir probando en local
+    "https://pro-active-beta.vercel.app" // TU DOMINIO REAL DE VERCEL
+  ],
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  credentials: true
+}));
 
 // 1. INICIALIZACIÓN DE FIREBASE DINÁMICA
 // Ya no usamos require('./serviceAccountKey.json')
