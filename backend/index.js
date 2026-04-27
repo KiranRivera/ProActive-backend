@@ -5,27 +5,18 @@ const admin = require('firebase-admin');
 
 const app = express();
 
-// SOLUCIÓN DEFINITIVA: Middleware Manual de Headers
 app.use((req, res, next) => {
-  const allowedOrigins = [
-    "http://localhost:5173",
-    "https://pro-active-beta.vercel.app"
-  ];
-  const origin = req.headers.origin;
+  // LOG PARA DEBUG: Verás esto en el dashboard de Render
+  console.log(`Petición recibida: ${req.method} ${req.url} desde ${req.headers.origin}`);
 
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', '*'); // Temporalmente permitimos TODO para descartar
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
 
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-  // Si es una petición OPTIONS (Preflight), respondemos 200 inmediatamente
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
+    return res.status(200).end();
   }
-
   next();
 });
 
