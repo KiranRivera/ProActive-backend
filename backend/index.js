@@ -7,13 +7,14 @@ const app = express();
 
 // 1. CONFIGURACIÓN DE CORS (Única y centralizada)
 app.use(cors({
-  origin: [
-    "http://localhost:5173", 
-    "https://pro-active-beta.vercel.app/" 
-  ],
-  methods: ["GET", "POST", "PATCH", "DELETE"],
-  credentials: true
+  origin: true, // Esto refleja el origen de la petición, sea cual sea
+  credentials: true,
+  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+// Responder 200 OK a todas las peticiones OPTIONS (Preflight)
+app.options('*', cors());
 
 app.use(express.json()); // Middleware para parsear JSON
 
