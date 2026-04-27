@@ -74,5 +74,17 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const updatePlan = async (req, res) => {
+  const { userId, newPlan } = req.body;
 
-module.exports = { registerUser, loginUser };
+  try {
+    const userRef = db.collection('Usuarios').doc(userId);
+    await userRef.update({ plan: newPlan });
+
+    res.status(200).json({ message: `Plan actualizado a ${newPlan} con éxito` });
+  } catch (error) {
+    res.status(500).json({ error: "Error al actualizar el plan" });
+  }
+};
+
+module.exports = { registerUser, loginUser, updatePlan };
