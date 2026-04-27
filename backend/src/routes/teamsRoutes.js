@@ -25,4 +25,5 @@ router.patch('/teams/:userId/:teamId/members/:memberId', teamController.toggleMe
 // Eliminar miembro: DELETE /api/business/teams/:userId/:teamId/members/:memberId
 router.delete('/teams/:userId/:teamId/members/:memberId', teamController.removeMember);
 
+
 module.exports = router;

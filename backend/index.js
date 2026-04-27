@@ -22,10 +22,16 @@ if (db) {
 const tasksRoutes = require('./src/routes/taskRoutes');
 const calendarRoutes = require('./src/routes/calendarRoutes'); 
 const notesRoutes = require('./src/routes/notesRoutes');
+
 const remindersRoutes = require('./src/routes/remindersRoutes');
 const goalsRoutes = require('./src/routes/goalsRoutes');
 const statsRoutes = require('./src/routes/statsRoutes');
+
 const teamsRoutes = require('./src/routes/teamsRoutes');
+const activityRoutes = require('./src/routes/activityRoutes');
+const reportRoutes = require('./src/routes/reportRoutes');
+
+const authRoutes = require("./src/routes/authRoutes")
 
 // 3. MIDDLEWARES
 app.use(cors());
@@ -42,6 +48,10 @@ app.use('/api/premium', remindersRoutes);
 app.use('/api/premium', goalsRoutes);
 
 app.use('/api/business', teamsRoutes);
+app.use('/api/business', activityRoutes);
+app.use('/api/business/reports', reportRoutes);
+
+app.use('/api/auth', authRoutes);
 
 
 
