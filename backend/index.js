@@ -14,7 +14,7 @@ app.use(cors({
 }));
 
 // Responder 200 OK a todas las peticiones OPTIONS (Preflight)
-app.options('/:any*', cors());
+app.options(/^(.*)$/, cors());
 
 app.use(express.json()); // Middleware para parsear JSON
 
