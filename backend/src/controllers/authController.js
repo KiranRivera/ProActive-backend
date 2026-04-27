@@ -78,13 +78,31 @@ const updatePlan = async (req, res) => {
   const { userId, newPlan } = req.body;
 
   try {
-    const userRef = db.collection('Usuarios').doc(userId);
-    await userRef.update({ plan: newPlan });
+    // 1. DEFINIR LA DB (Esto era lo que faltaba)
+    const db = admin.firestore(); 
 
-    res.status(200).json({ message: `Plan actualizado a ${newPlan} con éxito` });
+    // 2. REFERENCIAR AL USUARIO
+    const userRef = db.collection('Usuarios').doc(userId);
+    
+    // 3. ACTUALIZAR
+    await userRef.update({ 
+      plan: newPlan 
+    });
+
+    res.status(200).json({ 
+      message: `Plan actualizado a ${newPlan} con éxito`,
+      plan: newPlan 
+    });
   } catch (error) {
-    res.status(500).json({ error: "Error al actualizar el plan" });
+    // Es mejor devolver error.message para saber qué pasó (ej: si el ID no existe)
+    console.error("Error en updatePlan:", error.message);
+    res.status(500).json({ error: "Error al actualizar el plan", detalle: error.message });
   }
 };
 
-module.exports = { registerUser, loginUser, updatePlan };
+// No olvides exportarla al final del archivo
+module.exports = {
+  registerUser,
+  loginUser,
+  updatePlan
+};
