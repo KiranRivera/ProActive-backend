@@ -65,7 +65,7 @@ app.use('/api/calendar', calendarRoutes);
 app.use('/api/notes', notesRoutes);
 
 // Rutas Premium
-app.use('/api/premium/stats', statsRoutes);
+app.use('/api/premium/', statsRoutes);
 app.use('/api/premium/reminders', remindersRoutes);
 app.use('/api/premium/goals', goalsRoutes);
 
