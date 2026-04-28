@@ -3,9 +3,9 @@ const router = express.Router();
 const remindersController = require('../controllers/premium/remindersController');
 
 // Rutas de Recordatorios Premium
-router.get('/reminders/:userId', remindersController.getReminders);
-router.post('/reminders/:userId', remindersController.createReminder);
-router.patch('/reminders/:userId/:reminderId', remindersController.toggleReminder);
-router.delete('/reminders/:userId/:reminderId', remindersController.deleteReminder);
+router.get('/:userId', remindersController.getReminders);
+router.post('/:userId', remindersController.createReminder);
+router.patch('/:userId/:reminderId', remindersController.toggleReminder);
+router.delete('/:userId/:reminderId', remindersController.deleteReminder);
 
 module.exports = router;
